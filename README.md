@@ -1,38 +1,54 @@
 # Wait-for services in ownCloud CI
 
-Go package to test and wait on the availability of a TCP host and port.
-This package is Go port of [wait-for-it.sh](https://github.com/vishnubob/wait-for-it)
+[![Build Status](https://img.shields.io/drone/build/owncloud-ci/wait-for?logo=drone&server=https%3A%2F%2Fdrone.owncloud.com)](https://drone.owncloud.com/owncloud-ci/wait-for)
+[![Docker Hub](https://img.shields.io/docker/v/owncloudci/wait-for?logo=docker&label=dockerhub&sort=semver&logoColor=white)](https://hub.docker.com/r/owncloudci/wait-for)
+[![GitHub contributors](https://img.shields.io/github/contributors/owncloud-ci/wait-for)](https://github.com/owncloud-ci/wait-for/graphs/contributors)
+[![Source: GitHub](https://img.shields.io/badge/source-github-blue.svg?logo=github&logoColor=white)](https://github.com/owncloud-ci/wait-for)
+[![License: MIT](https://img.shields.io/github/license/owncloud-ci/wait-for)](https://github.com/owncloud-ci/wait-for/blob/master/LICENSE)
 
-# Usage
+
+A small tool to test and wait on the availability of a TCP host and port.
+
+## Quick reference
+
+- **Usage:**
 
 ```bash
 wait-for:
   -it value
-        <host:port> [host2:port,...] comma seperated list of services
+        <host:port> [host2:port,...] comma separated list of services
   -t int
         timeout (default 20)
 ```
 
-# Example
+- **Where to file issues:**\
+  [owncloud-ci/wait-for](https://github.com/owncloud-ci/wait-for/issues)
 
+- **Supported architectures:**\
+  `amd64`, `arm32v7`, `arm64v8`
 
-### simple
-```bash
-$ wait-for -it github.com:80 && echo "github is up!"
-services are ready!
-github is up!
-```
+## Docker Tags and respective Dockerfile links
 
-### multiple hosts and custom timeout
-```bash
-$ wait-for -t 5 -it github.com:80,bitbucket.com:80 && echo "github and bitbucket are up!"
-services are ready!
-github and bitbucket are up!
-```
+- [`latest`](https://github.com/owncloud-ci/wait-for/blob/master/latest/Dockerfile.amd64) available as `owncloudci/wait-for:latest`
 
-### docker users
-~2.7MB docker image.
-```bash
-$ docker run --rm alioygur/wait-for -it google.com:80
-services are ready!
+## Default volumes
+
+None
+
+## Exposed ports
+
+None
+
+## Environment variables
+
+None
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](https://github.com/owncloud-ci/alpine/blob/master/LICENSE) file for details.
+
+## Copyright
+
+```Text
+Copyright (c) 2021 ownCloud GmbH
 ```
