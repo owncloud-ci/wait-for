@@ -4,7 +4,7 @@ COPY ./src /app/
 WORKDIR /app
 RUN go build -o wait-for .
 
-FROM scratch
+FROM arm32v7/alpine:3.13@sha256:9663906b1c3bf891618ebcac857961531357525b25493ef717bca0f86f581ad6
 
 LABEL maintainer="ownCloud GmbH <devops@owncloud.com>"
 LABEL org.opencontainers.image.authors="ownCloud DevOps <devops@owncloud.com>"
