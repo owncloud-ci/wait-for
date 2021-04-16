@@ -274,11 +274,6 @@ def dryrun(config):
             "repo": "owncloudci/%s" % config["repo"],
             "context": config["path"],
         },
-        "when": {
-            "ref": [
-                "refs/pull/**",
-            ],
-        },
     }]
 
 def publish(config):
