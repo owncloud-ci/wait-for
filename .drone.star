@@ -256,11 +256,6 @@ def copysrc(config):
             "cp go.mod %s/src" % (config["path"]),
             "cp go.sum %s/src" % (config["path"]),
         ],
-        "when": {
-            "ref": [
-                "refs/pull/**",
-            ],
-        },
     }]
 
 def dryrun(config):
@@ -273,6 +268,11 @@ def dryrun(config):
             "dockerfile": "%s/Dockerfile.%s" % (config["path"], config["arch"]),
             "repo": "owncloudci/%s" % config["repo"],
             "context": config["path"],
+        },
+        "when": {
+            "ref": [
+                "refs/pull/**",
+            ],
         },
     }]
 
