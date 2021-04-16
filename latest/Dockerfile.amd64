@@ -15,5 +15,3 @@ LABEL org.opencontainers.image.documentation="https://github.com/owncloud-ci/wai
 
 COPY --from=0 /app/wait-for /app/wait-for
 ENTRYPOINT [ "/app/wait-for" ]
-
-RUN /app/wait-for
