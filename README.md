@@ -6,7 +6,6 @@
 [![Source: GitHub](https://img.shields.io/badge/source-github-blue.svg?logo=github&logoColor=white)](https://github.com/owncloud-ci/wait-for)
 [![License: MIT](https://img.shields.io/github/license/owncloud-ci/wait-for)](https://github.com/owncloud-ci/wait-for/blob/master/LICENSE)
 
-
 A small tool to test and wait on the availability of a TCP host and port.
 
 ## Quick reference
