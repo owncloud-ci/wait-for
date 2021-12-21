@@ -49,5 +49,5 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 ## Copyright
 
 ```Text
-Copyright (c) 2021 ownCloud GmbH
+Copyright (c) 2022 ownCloud GmbH
 ```
