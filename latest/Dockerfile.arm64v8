@@ -1,4 +1,4 @@
-FROM owncloudci/golang:1.17-arm64v8@sha256:1778d4efb72505a79e570ce9113b1b72ff4398bcdee89078808dfcfc0556555e
+FROM owncloudci/golang:1.17-arm64v8@sha256:dd6ee3a758d08499a61bee81751f88debf8a0623ff14bf2ed4afbddd158ad695
 
 COPY ./src /app/
 WORKDIR /app
