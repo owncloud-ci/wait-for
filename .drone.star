@@ -353,7 +353,7 @@ def binaryReleases(ctx, binaryTargets):
 def binaryReleaseStep(ctx, os, arch):
     return {
         "name": "binaries-%s-%s" % (os, arch),
-        "image": "owncloudci/golang:1.18",
+        "image": "owncloudci/golang:1.19",
         "pull": "always",
         "commands": [
             "GOOS=%s GOARCH=%s CGO_ENABLED=0 go build -o bin/wait-for-%s-%s ." % (os, arch, os, arch),
