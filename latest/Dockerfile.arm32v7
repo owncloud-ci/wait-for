@@ -4,7 +4,7 @@ COPY ./src /app/
 WORKDIR /app
 RUN go build -o wait-for .
 
-FROM arm32v7/alpine:3.17@sha256:1c34b3cb760a98c23361d919357b99fa497074576c898e7289425d45ef67b46a
+FROM arm32v7/alpine:3.17@sha256:68a5b7d32422e42b98bedfe2aef4d0b3445f69f0efe390ba2204427d80179a92
 
 LABEL maintainer="ownCloud GmbH <devops@owncloud.com>"
 LABEL org.opencontainers.image.authors="ownCloud DevOps <devops@owncloud.com>"
