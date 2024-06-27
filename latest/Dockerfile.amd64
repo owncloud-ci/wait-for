@@ -1,10 +1,10 @@
-FROM owncloudci/golang:1.22-amd64@sha256:a1eb26b159e33c2234ed5665f89e4ae27ca95ad402a88589130a4e1812548567
+FROM owncloudci/golang:1.22-amd64@sha256:04d6d21f0dbaa11ccec7ed943cf61074801ee795267bc21778331ce6c3327369
 
 COPY ./src /app/
 WORKDIR /app
 RUN go build -o wait-for .
 
-FROM alpine:3.20@sha256:77726ef6b57ddf65bb551896826ec38bc3e53f75cdde31354fbffb4f25238ebd
+FROM alpine:3.20@sha256:b89d9c93e9ed3597455c90a0b88a8bbb5cb7188438f70953fede212a0c4394e0
 
 LABEL maintainer="ownCloud GmbH <devops@owncloud.com>"
 LABEL org.opencontainers.image.authors="ownCloud DevOps <devops@owncloud.com>"
