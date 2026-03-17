@@ -283,6 +283,7 @@ def binaryReleaseStep(ctx, os, arch):
         "image": "owncloudci/golang:1.25",
         "pull": "always",
         "commands": [
+            "go version",
             "GOOS=%s GOARCH=%s CGO_ENABLED=0 go build -o bin/wait-for-%s-%s ." % (os, arch, os, arch),
         ],
         "when": {
