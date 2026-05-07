@@ -1,0 +1,55 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [master]
+    tags: ["*"]
+  pull_request:
+
+jobs:
+  docker:
+    uses: owncloud-docker/ubuntu/.github/workflows/docker-build.yml@master
+    with:
+      docker-repo-name: owncloudci/wait-for
+      docker-tag: latest
+      docker-context: .
+      docker-file: latest/Dockerfile
+      docker-hub-username: ${{ vars.DOCKERHUB_USERNAME }}
+      push: ${{ github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/') }}
+    secrets:
+      docker-hub-password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
+        with:
+          go-version-file: go.mod
+
+      - name: Build binaries
+        run: |
+          mkdir -p bin
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/wait-for-linux-amd64 .
+          CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o bin/wait-for-linux-arm64 .
+
+      - name: Release
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0
+        with:
+          files: bin/*
+          prerelease: ${{ contains(github.ref_name, '-') }}
+
+  docs:
+    needs: docker
+    if: github.ref == 'refs/heads/master'
+    uses: owncloud-docker/ubuntu/.github/workflows/docker-hub-desc.yml@master
+    with:
+      docker-repo-name: owncloudci/wait-for
+      docker-repo-description: Wait-for services in ownCloud CI
+      docker-hub-username: ${{ vars.DOCKERHUB_USERNAME }}
+    secrets:
+      docker-hub-password: ${{ secrets.DOCKERHUB_TOKEN }}
