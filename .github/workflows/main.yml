@@ -16,6 +16,7 @@ jobs:
       docker-file: latest/Dockerfile
       docker-hub-username: ${{ vars.DOCKERHUB_USERNAME }}
       push: ${{ github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/') }}
+      trivy-ignore-files: latest/.trivyignore
     secrets:
       docker-hub-password: ${{ secrets.DOCKERHUB_TOKEN }}
 
