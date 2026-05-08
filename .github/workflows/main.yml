@@ -17,7 +17,7 @@ jobs:
       docker-hub-username: ${{ vars.DOCKERHUB_USERNAME }}
       push: ${{ github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/') }}
       trivy-ignore-files: latest/.trivyignore
-      smoke-test-cmd: test -x /usr/bin/wait-for
+      smoke-test-cmd: wait-for --help
     secrets:
       docker-hub-password: ${{ secrets.DOCKERHUB_TOKEN }}
 
