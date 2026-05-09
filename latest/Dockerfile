@@ -1,10 +1,11 @@
-FROM owncloudci/golang:1.25-arm64v8@sha256:e6031588ae9107f013718fe80b4ba3a1b0a9548eeedfcf4a9f5ab95e16628684
+FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS builder
 
-COPY ./src /app/
+ARG TARGETARCH
 WORKDIR /app
-RUN go build -o wait-for .
+COPY go.mod go.sum wait-for.go ./
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -o wait-for .
 
-FROM arm64v8/alpine:3.23@sha256:b44095febd0478ce6af640e50a9c66a37c9dcee639bfb64a0441f74a8fe464fc
+FROM alpine:3.23@sha256:5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11
 
 LABEL maintainer="ownCloud GmbH <devops@owncloud.com>"
 LABEL org.opencontainers.image.authors="ownCloud DevOps <devops@owncloud.com>"
@@ -13,5 +14,5 @@ LABEL org.opencontainers.image.url="https://hub.docker.com/r/owncloudci/wait-for
 LABEL org.opencontainers.image.source="https://github.com/owncloud-ci/wait-for"
 LABEL org.opencontainers.image.documentation="https://github.com/owncloud-ci/wait-for"
 
-COPY --from=0 /app/wait-for /usr/bin/wait-for
-ENTRYPOINT [ "wait-for" ]
+COPY --from=builder /app/wait-for /usr/bin/wait-for
+ENTRYPOINT ["wait-for"]

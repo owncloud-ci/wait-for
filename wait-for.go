@@ -12,6 +12,7 @@ import (
 
 type servicesType []string
 
+var help bool
 var timeout int
 var services servicesType
 
@@ -55,12 +56,17 @@ func waitForServices(services []string, timeOut time.Duration) error {
 }
 
 func init() {
+	flag.BoolVar(&help, "help", false, "print usage and exit")
 	flag.IntVar(&timeout, "t", 20, "timeout")
 	flag.Var(&services, "it", "<host:port> [host2:port,...] comma seperated list of services")
 }
 
 func main() {
 	flag.Parse()
+	if help {
+		flag.Usage()
+		os.Exit(0)
+	}
 	if len(services) == 0 {
 		flag.Usage()
 		os.Exit(1)
