@@ -1,3 +1,3 @@
 module github.com/owncloud-ci/wait-for
 
-go 1.25.8
+go 1.26.3
